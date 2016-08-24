@@ -27,10 +27,10 @@ class Controller:
 	# initialize storage variables
 	def __init__(self, initialSensorValue, maxThrottle, minThrottle, setPoint, integralThreshold, kP, kI, kD):
 		__base = initialSensorValue,
-		__maxThrotte = maxThrottle
+		__maxThrottle = maxThrottle
 		__minThrottle = minThrottle
 		__throttleRange = abs(__maxThrottle - __minThrottle)
-		__setPoint = setPoint
+		__setPoint = setPoint + __base
 		__position = __base
 		__integralThreshold = integralThreshold
 		__kP = kP
@@ -43,7 +43,7 @@ class Controller:
 		
 	# assign controller's destination value mid-flight
 	def setSetPoint(self, setPoint):
-		__setPoint = setPoint
+		__setPoint = setPoint + __base
 	
 	# returns throttle value used to reach setPoint
 	def getThrottlePercent(self, sensorValue):
@@ -68,9 +68,9 @@ class Controller:
 		#restrict output to expected range
 		if (adjustedOutput < __minThrottle):
 			return __minThrottle
-		else if (adjustedOutput > __maxThrottle):
+		elif (adjustedOutput > __maxThrottle):
 			return __maxThrottle
-		else
+		else:
 			return adjustedOutput 
 		
 	# safely return the vehicle to the base position. Will cause vehicle to plummet to the ground in current configuration.

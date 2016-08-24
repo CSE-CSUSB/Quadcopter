@@ -35,36 +35,22 @@ class Throttle:
 		self.__throttle = GPIO.PWM(self.__motorPin, self.__frequency) #PWM object. GPIO.PWM(pin number, frequency in Hz)
 		self.__throttle.start(self.__minThrottle) #Sets initial duty cycle to minimum to arm motor
 	
-	# assigns a new throttle output to motor 1 or 3 
-	def setThrottleOdd(self, Altitude, Pitch, Yaw):
+	# assignes a new throttle output to motors
+	def setThrottle(self, Altitude, Roll, Pitch, Yaw):
 		if (self.__motorNumber == self.__motor1):
 			newThrottle = Altitude - Pitch + Yaw
-			if (newThrottle > self.__maxThrottle):
-				newThrottle = self.__maxThrottle
-			elif (newThrottle < self.__minThrottle):
-				newThrottle = self.__minThrottle
-		else:	# motor 3
-			newThrottle = Altitude + Pitch + Yaw
-			if (newThrottle > self.__maxThrottle):
-				newThrottle = self.__maxThrottle
-			elif (newThrottle < self.__minThrottle):
-				newThrottle = self.__minThrottle
-		self.__throttle.ChangeDutyCycle(newThrottle)	# assign new duty cycle
-	
-	# assignes a new throttle output to motor 2 or 4
-	def setThrottleEven(self, Altitude, Roll, Yaw):
-		if (self.__motorNumber == self.__motor2):
+		elif (self.__motorNumber == self.__motor2):
 			newThrottle = Altitude - Roll + Yaw
-			if (newThrottle > self.__maxThrottle):
-				newThrottle = self.__maxThrottle
-			elif (newThrottle < self.__minThrottle):
-				newThrottle = self.__minThrottle
+		elif (self.__motorNumber == self.__motor3):
+			newThrottle = Altitude + Pitch + Yaw
 		else:	# motor 4
 			newThrottle = Altitude + Roll + Yaw
-			if (newThrottle > self.__maxThrottle):
-				newThrottle = self.__maxThrottle
-			elif (newThrottle < self.__minThrottle):
-				newThrottle = self.__minThrottle
+			
+		if (newThrottle > self.__maxThrottle):
+			newThrottle = self.__maxThrottle
+		elif (newThrottle < self.__minThrottle):
+			newThrottle = self.__minThrottle
+			
 		self.__throttle.ChangeDutyCycle(newThrottle)	# assign new duty cycle
 		return newThrottle
 	

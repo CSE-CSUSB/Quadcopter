@@ -8,3 +8,10 @@ SP16 - Implement Altitude Control Algorithm [ACCOMPLISHED]
 FA16 - Perform Autonomous Hover Test [IN PROGRESS]  
 WI17 - Stabilize Hover Algorithm  
 SP17 - Implement Simple Visual Object Tracking  
+
+## Files
+BMP180.py - defines the api for the barometer
+MPU6050.py - defines the api for the gyro/accelerometer
+Throttle.py - manages motor interface
+Controller.py - translates sensor inputs into motor outputs
+flightController.py - contains the other classes and receives user input
