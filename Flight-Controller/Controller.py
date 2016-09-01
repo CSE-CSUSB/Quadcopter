@@ -26,54 +26,54 @@ class Controller:
 	
 	# initialize storage variables
 	def __init__(self, initialSensorValue, maxThrottle, minThrottle, setPoint, integralThreshold, kP, kI, kD):
-		__base = initialSensorValue,
-		__maxThrottle = maxThrottle
-		__minThrottle = minThrottle
-		__throttleRange = abs(__maxThrottle - __minThrottle)
-		__setPoint = setPoint + __base
-		__position = __base
-		__integralThreshold = integralThreshold
-		__kP = kP
-		__kI = kI
-		__kD = kD
+		self.__base = initialSensorValue,
+		self.__maxThrottle = maxThrottle
+		self.__minThrottle = minThrottle
+		self.__throttleRange = abs(maxThrottle - minThrottle)
+		self.__setPoint = setPoint + initialSensorValue
+		self.__position = self.__base
+		self.__integralThreshold = integralThreshold
+		self.__kP = kP
+		self.__kI = kI
+		self.__kD = kD
 	
 	# update position variable during flight
 	def __updatePosition(self, sensorValue):
-		__position = sensorValue
+		self.__position = sensorValue
 		
 	# assign controller's destination value mid-flight
 	def setSetPoint(self, setPoint):
-		__setPoint = setPoint + __base
+		self.__setPoint = setPoint + self.__base
 	
 	# returns throttle value used to reach setPoint
 	def getThrottlePercent(self, sensorValue):
-		__updatePosition(sensorValue)
+		self.__updatePosition(sensorValue)
 		
-		#return (((((__position - __minInputValue) * __throttleRange) / __inputValueRange) + __minThrottle) * 100) / throttleRange #calculates directly proportional throttle value. The lazy solution
+		#return (((((self.__position - self.__minInputValue) * self.__throttleRange) / self.__inputValueRange) + self.__minThrottle) * 100) / throttleRange #calculates directly proportional throttle value. The lazy solution
 		
-		error = __setPoint - __position #calculate new error value
+		error = self.__setPoint - self.__position #calculate new error value
 		
 		#calculate new integral value
-		if ( abs(__integral) > abs(__integralThreshold) ):
-			__integral = 0
+		if ( abs(self.__integral) > abs(self.__integralThreshold) ):
+			self.__integral = 0
 		else:
-			__integral = __integral + error
+			self.__integral = self.__integral + error
 		
-		derivative = error - __prevError #calculate new derivative value
-		__prevError = error #update previous error storage
+		derivative = error - self.__prevError #calculate new derivative value
+		self.__prevError = error #update previous error storage
 		
-		adjustedOutput = (kP * error) + (kI * __integral) + (kD * derivative) #calculate motor compensation
-		adjustedOutput = (adjustedOutput * 100) / throttleRange #convert output to percentage
+		adjustedOutput = (self.__kP * error) + (self.__kI * self.__integral) + (self.__kD * derivative) #calculate motor compensation
+		adjustedOutput = (adjustedOutput * 100) / self.__throttleRange #convert output to percentage
 		
 		#restrict output to expected range
-		if (adjustedOutput < __minThrottle):
-			return __minThrottle
-		elif (adjustedOutput > __maxThrottle):
-			return __maxThrottle
+		if (adjustedOutput < self.__minThrottle):
+			return self.__minThrottle
+		elif (adjustedOutput > self.__maxThrottle):
+			return self.__maxThrottle
 		else:
 			return adjustedOutput 
 		
 	# safely return the vehicle to the base position. Will cause vehicle to plummet to the ground in current configuration.
 	def land(self):
-		setSetPoint(__base)
+		setSetPoint(self.__base)
 			
