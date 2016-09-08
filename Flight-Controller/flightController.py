@@ -18,7 +18,7 @@ from Controller import Controller
 a = BMP180()
 rp = MPU6050()
 initialAltitude = a.getAltitude()
-initialRoll, initialPitch = rp.getAngles()
+(initialRoll, initialPitch) = rp.getAngles()
 initialYaw = 0 # currently unused
 
 # Motor object initialization
@@ -67,11 +67,13 @@ cPitch = Controller(initialPitch, maxThrottle, minThrottle, pSetPoint, pIntegral
 cAltitude = Controller(initialAltitude, maxThrottle, minThrottle, aSetPoint, aIntegralThreshold, aKP, aKI, aKD)
 #cYaw = Controller(initialYaw, maxThrottle, minThrottle, ySetPoint, yIntegralThreshold, yKP, yKI, yKD)
 
+time.sleep(5)
+
 while True:
 	(xAngle, yAngle) = rp.getAngles()
-	aVal = cAltitude.getThrottlePercent(a.getAltitude())
-	rVal = cRoll.getThrottlePercent(xAngle)
-	pVal = cPitch.getThrottlePercent(yAngle)
+	aVal = cAltitude.getThrottlePercent(a.getAltitude());
+	rVal = cRoll.getThrottlePercent(xAngle);
+	pVal = cPitch.getThrottlePercent(yAngle);
 	yVal = 0 #currently unused
 	
 	t1.setThrottle(aVal, rVal, pVal, yVal)

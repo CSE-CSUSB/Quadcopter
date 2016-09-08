@@ -29,13 +29,13 @@ class Controller:
 		self.__base = initialSensorValue,
 		self.__maxThrottle = maxThrottle
 		self.__minThrottle = minThrottle
-		self.__throttleRange = abs(maxThrottle - minThrottle)
-		self.__setPoint = setPoint + initialSensorValue
+		self.__throttleRange = abs(self.__maxThrottle - self.__minThrottle)
 		self.__position = self.__base
 		self.__integralThreshold = integralThreshold
 		self.__kP = kP
 		self.__kI = kI
 		self.__kD = kD
+		self.__setPoint = setPoint + initialSensorValue
 	
 	# update position variable during flight
 	def __updatePosition(self, sensorValue):
@@ -49,7 +49,7 @@ class Controller:
 	def getThrottlePercent(self, sensorValue):
 		self.__updatePosition(sensorValue)
 		
-		#return (((((self.__position - self.__minInputValue) * self.__throttleRange) / self.__inputValueRange) + self.__minThrottle) * 100) / throttleRange #calculates directly proportional throttle value. The lazy solution
+		#return (((((__position - __minInputValue) * __throttleRange) / __inputValueRange) + __minThrottle) * 100) / throttleRange #calculates directly proportional throttle value. The lazy solution
 		
 		error = self.__setPoint - self.__position #calculate new error value
 		

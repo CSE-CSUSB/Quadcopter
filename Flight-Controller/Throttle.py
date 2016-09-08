@@ -16,7 +16,7 @@ class Throttle:
 	__motor1 = 1
 	__motor2 = 2
 	__motor3 = 3
-	__motor4 = 4
+	#__motor4 = 4#commented out because motor4 is the default case in setThrottle
 	
 	# storage variables
 	__motorNumber = 0	# designates physical motor number (1-4)
