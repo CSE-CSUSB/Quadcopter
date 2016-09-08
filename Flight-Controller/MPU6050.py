@@ -62,9 +62,9 @@ class MPU6050:
 		rotationX = self.__getXRotation()
 		rotationY = self.__getYRotation()
 		
-		# calculate initial x and y angles
-		self.__prevX = self.__k * (rotationX + gyroScaledX) + (self.__k1 * rotationX)
-		self.__prevY = self.__k * (rotationY + gyroScaledY) + (self.__k1 * rotationY)
+		# calculate initial x and y angles for filter algorithm
+		#self.__prevX = self.__k * (rotationX + gyroScaledX) + (self.__k1 * rotationX)
+		#self.__prevY = self.__k * (rotationY + gyroScaledY) + (self.__k1 * rotationY)
 	
 	# Calculate two's complement
 	def __twosComp(self, val):
@@ -123,12 +123,14 @@ class MPU6050:
 		rotationX = self.__getXRotation()
 		rotationY = self.__getYRotation()
 		
-		# calculate initial x and y angles
-		angleX = self.__k * (self.__prevX + gyroScaledX) + (self.__k1 * rotationX)
-		angleY = self.__k * (self.__prevY + gyroScaledY) + (self.__k1 * rotationY)
+		# calculate x and y angle outputs
+		angleX = self.__k * (self.__getXRotation() + gyroScaledX) + (self.__k1 * rotationX)
+		#angleX = self.__k * (self.__prevX + gyroScaledX) + (self.__k1 * rotationX)#filtered output
+		angleY = self.__k * (self.__getYRotation() + gyroScaledY) + (self.__k1 * rotationY)
+		#angleY = self.__k * (self.__prevY + gyroScaledY) + (self.__k1 * rotationY)#filtered output
 		
-		# store new value as previous
-		self.__prevX = angleX 
-		self.__prevY = angleY
+		# store new value as previous for filtered output
+		#self.__prevX = angleX 
+		#self.__prevY = angleY
 		
 		return (angleX, angleY)

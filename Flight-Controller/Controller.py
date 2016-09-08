@@ -63,15 +63,16 @@ class Controller:
 		self.__prevError = error #update previous error storage
 		
 		adjustedOutput = (self.__kP * error) + (self.__kI * self.__integral) + (self.__kD * derivative) #calculate motor compensation
-		adjustedOutput = (adjustedOutput * 100) / self.__throttleRange #convert output to percentage
+		#removed percentage based output because this assumes a maximum and minimum value for both throttle and sensor input. The controller needs to be able to respond to a varying range of sensor inputs. Therefore, control shall be made dependent on PD values.
+		'''adjustedOutput = (adjustedOutput * 100) / self.__throttleRange #convert output to percentage
 		
 		#restrict output to expected range
 		if (adjustedOutput < self.__minThrottle):
 			return self.__minThrottle
 		elif (adjustedOutput > self.__maxThrottle):
 			return self.__maxThrottle
-		else:
-			return adjustedOutput 
+		else:'''
+		return adjustedOutput 
 		
 	# safely return the vehicle to the base position. Will cause vehicle to plummet to the ground in current configuration.
 	def land(self):

@@ -29,29 +29,29 @@ minThrottle = 5
 # motorNumber, motorPin, frequency, maxThrottle, minThrottle
 t1 = Throttle(1, 12, frequency, maxThrottle, minThrottle)
 t2 = Throttle(2, 13, frequency, maxThrottle, minThrottle)
-t3 = Throttle(3, 16, frequency, maxThrottle, minThrottle)
+t3 = Throttle(3, 22, frequency, maxThrottle, minThrottle)
 t4 = Throttle(4, 18, frequency, maxThrottle, minThrottle)
 
 # Controller object initialization
 # roll controller variables
 rSetPoint = 0
-rIntegralThreshold = 100
-rKP = 1
-rKI = 1
-rKD = 1
+rIntegralThreshold = 90
+rKP = 0.9
+rKI = 0
+rKD = 0.1
 
 # pitch controller variables
 pSetPoint = 0
-pIntegralThreshold = 100
-pKP = 1
-pKI = 1
-pKD = 1
+pIntegralThreshold = 90
+pKP = 0.9
+pKI = 0
+pKD = 0.1
 
 # altitude controller variables
-aSetPoint = 1
-aIntegralThreshold = 100
-aKP = 1
-aKI = 1
+aSetPoint = 0.05
+aIntegralThreshold = 10
+aKP = 10
+aKI = 0
 aKD = 1
 
 # yaw controller variables, currently unused
@@ -71,10 +71,18 @@ time.sleep(5)
 
 while True:
 	(xAngle, yAngle) = rp.getAngles()
+	
 	aVal = cAltitude.getThrottlePercent(a.getAltitude());
 	rVal = cRoll.getThrottlePercent(xAngle);
 	pVal = cPitch.getThrottlePercent(yAngle);
 	yVal = 0 #currently unused
+	
+	print aVal,	rVal,	pVal
+	
+	#t1.setThrottle(7, 0, 0, 0)
+	#t2.setThrottle(7, 0, 0, 0)
+	#t3.setThrottle(7, 0, 0, 0)
+	#t4.setThrottle(7, 0, 0, 0)
 	
 	t1.setThrottle(aVal, rVal, pVal, yVal)
 	t2.setThrottle(aVal, rVal, pVal, yVal)

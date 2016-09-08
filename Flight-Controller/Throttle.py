@@ -5,6 +5,7 @@ QA:
 Date: 05/27/2016
 References: raspberry pi GPIO library
 Description: manages motor output based on sensor values
+In the + (plus) configuration, motors 2 and 4 control roll, motors 1 and 3 controll pitch, and all motors contribute to altitude.
 '''
 
 import RPi.GPIO as GPIO	# loads General Purpose Input/Output library
