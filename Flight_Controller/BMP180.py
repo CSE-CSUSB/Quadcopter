@@ -134,11 +134,12 @@ class BMP180:
 	def getAltitude(self):
 		i = 0
 		avg = 0
-		limit = 10
-		while i < limit:
+		limit = 5
+		'''while i < limit:
 			avg += 44330.0 * (1.0 - pow(self.__calcPressure() / 101325.0, (1.0/5.255)))
 			i += 1
-		return avg / limit
-		#return 44330.0 * (1.0 - pow(self.__calcPressure() / 101325.0, (1.0/5.255)))
+		return round(avg / limit)'''
+		return (44330.0 * (1.0 - pow(self.__calcPressure() / 1013.25, (1.0/5.255)))) / 10
 		
+
 

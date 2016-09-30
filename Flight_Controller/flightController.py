@@ -22,7 +22,7 @@ initialAltitude = a.getAltitude()
 initialYaw = 0 # currently unused
 
 # Motor object initialization
-frequency = 55
+frequency = 55.5#55
 maxThrottle = 10
 minThrottle = 5
 
@@ -48,7 +48,7 @@ pKI = 0
 pKD = 0.1
 
 # altitude controller variables
-aSetPoint = 0.05
+aSetPoint = 1.5
 aIntegralThreshold = 10
 aKP = 10
 aKI = 0
@@ -68,23 +68,24 @@ cAltitude = Controller(initialAltitude, maxThrottle, minThrottle, aSetPoint, aIn
 #cYaw = Controller(initialYaw, maxThrottle, minThrottle, ySetPoint, yIntegralThreshold, yKP, yKI, yKD)
 
 time.sleep(5)
+flightDuration = time.time()
 
-while True:
+while (time.time() - flightDuration) < 30:
 	(xAngle, yAngle) = rp.getAngles()
-	
-	aVal = cAltitude.getThrottlePercent(a.getAltitude());
-	rVal = cRoll.getThrottlePercent(xAngle);
-	pVal = cPitch.getThrottlePercent(yAngle);
+	altitude = a.getAltitude()
+
+	aVal = cAltitude.getThrottlePercent(altitude)
+	rVal = 0#cRoll.getThrottlePercent(xAngle)
+	pVal = 0#cPitch.getThrottlePercent(yAngle)
 	yVal = 0 #currently unused
 	
 	print aVal,	rVal,	pVal
-	
-	#t1.setThrottle(7, 0, 0, 0)
-	#t2.setThrottle(7, 0, 0, 0)
-	#t3.setThrottle(7, 0, 0, 0)
-	#t4.setThrottle(7, 0, 0, 0)
 	
 	t1.setThrottle(aVal, rVal, pVal, yVal)
 	t2.setThrottle(aVal, rVal, pVal, yVal)
 	t3.setThrottle(aVal, rVal, pVal, yVal)
 	t4.setThrottle(aVal, rVal, pVal, yVal)
+t1.throttleEnd(False)
+t2.throttleEnd(False)
+t3.throttleEnd(False)
+t4.throttleEnd(True)
