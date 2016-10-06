@@ -1,5 +1,9 @@
-# Quadcopter
+# Skyote (Quadcopter)
 Student led Computer Science and Engineering project at CSU San Bernardino that aims to design and build a quadcopter capable of autonomous flight and visual object tracking.
+
+# Branches
+python - Contains the original python source code
+c++ - Contains C++ source code.
 
 ## Quarterly Goals
 FA15 - Test Motor Control w/Remote Joystick [ACCOMPLISHED]  
