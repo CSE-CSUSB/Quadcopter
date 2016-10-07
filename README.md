@@ -3,7 +3,7 @@ Student led Computer Science and Engineering project at CSU San Bernardino that 
 
 # Branches
 python - Contains the original python source code  
-c++ - Contains C++ source code.
+c++ - Contains C++ source code.  
 
 ## Quarterly Goals
 FA15 - Test Motor Control w/Remote Joystick [ACCOMPLISHED]  
@@ -16,7 +16,7 @@ SP17 - Implement Simple Visual Object Tracking
 ## Files
 BMP180.py - defines the api for the barometer. Primarily used for altitude control.  
 MPU6050.py - defines the api for the gyro/accelerometer. Primarily used for flight stabilization.  
-SR04.py - defines the api for the ultrasonic sensor. Primarily used for collision avoidance and  assists altitude control.  
+SR04.py - defines the api for the ultrasonic sensor. Primarily used for collision avoidance and assists altitude control.  
 Throttle.py - manages motor interface.  
 Controller.py - translates sensor inputs into motor outputs.  
 flightController.py - contains the other classes and receives user input.  

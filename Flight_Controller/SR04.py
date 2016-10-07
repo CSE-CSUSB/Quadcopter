@@ -27,7 +27,7 @@ class SR04:
 	def getDistance(self):
 		#send 10us pulse through trigger to begin measurement
 		GPIO.output(self.__triggerPin, False) #cutoff power to pin
-		time.sleep(.05) #extended LOW signal delay to prevent polling the sensor too quickly
+		time.sleep(.05)
 		GPIO.output(self.__triggerPin, True) #send pulse to begin measurement
 		time.sleep(0.00001) #10us delay specified in datasheet
 		GPIO.output(self.__triggerPin, False)
@@ -35,11 +35,12 @@ class SR04:
 		#read echo duration
 		autoSkip = time.time()
 		while (GPIO.input(self.__echoPin) == 0) and ((time.time() - autoSkip) < 0.25):
+			1+1 #print time.time() - autoSkip
 		pulse_start = time.time()
 
 		autoSkip = time.time()
 		while (GPIO.input(self.__echoPin) == 1) and ((time.time() - autoSkip) < 0.25):
-		
+			1+1 #print time.time() - autoSkip
 		pulse_end = time.time()
 		pulse_duration = pulse_end - pulse_start
 
