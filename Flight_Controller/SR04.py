@@ -40,7 +40,7 @@ class SR04:
 		pulse_duration = pulse_end - pulse_start
 
 		#calculate and return distance in cm
-		distance = pulse_duration * 10^6 #convert seconds to milliseconds
+		distance = pulse_duration * pow(10, 6) #convert seconds to milliseconds
 		distance /= 58 #calculate distance in centimeters
 
 		return distance
