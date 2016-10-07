@@ -52,7 +52,7 @@ pKD = 0.1
 # altitude controller variables
 aSetPoint = 20 #distance in cm
 aIntegralThreshold = 10
-aKP = 2.75
+aKP = 10
 aKI = 0
 aKD = 1
 
