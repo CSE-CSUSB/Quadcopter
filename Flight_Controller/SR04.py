@@ -9,7 +9,7 @@ Description: interface for the SR04 Ultrasonic Sensor.
 import RPi.GPIO as GPIO #loads general purpose input/output library
 import time #loads time library
 
-GPIO.setmode(GPIO.BOARD) #pin assignments mapped to values on board
+GPIO.setmode(GPIO.BCM) #pin assignments mapped to values on board
 
 class SR04:
 	# constants

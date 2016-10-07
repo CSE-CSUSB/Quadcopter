@@ -9,7 +9,7 @@ Description: manages motor output based on sensor values
 
 import RPi.GPIO as GPIO	# loads General Purpose Input/Output library
 
-GPIO.setmode(GPIO.BOARD)	# pins assignments mapped to printed values on board
+GPIO.setmode(GPIO.BCM)	# pins assignments mapped to printed values on board
 
 class Throttle:
 	# constants

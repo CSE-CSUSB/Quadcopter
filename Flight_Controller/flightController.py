@@ -22,7 +22,7 @@ initialAltitude = a.getAltitude()
 initialYaw = 0 # currently unused
 
 # Motor object initialization
-frequency = 55.5#55
+frequency = 55.5
 maxThrottle = 10
 minThrottle = 5
 
